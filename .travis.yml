@@ -1,0 +1,12 @@
+language: generic
+before_install:
+  - curl http://downloads.arduino.cc/arduino-cli/arduino-cli-latest-linux64.tar.bz2 | tar xj
+  - mkdir -p $HOME/bin
+  - mv arduino-cli $HOME/bin/arduino-cli
+  - export PATH=$PATH:$HOME/bin
+  - arduino-cli core update-index
+install:
+  - mkdir -p $HOME/Arduino/libraries
+  - ln -s $PWD $HOME/Arduino/libraries/.
+script:
+  - arduino-cli compile -b esp32:esp32:ttgo-t-watch octopus.ino
